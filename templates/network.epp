@@ -1,5 +1,6 @@
 <%- |
     Array[Hash] $addresses,
+    Array[Hash] $network,
     String[1] $interface,
     Array[Hash[String[1], Variant[String[1], Boolean]]] $routes,
 | -%>
@@ -12,6 +13,10 @@ Name=<%= $interface %>
 DHCP=no
 IPv6AcceptRA=false
 IPForward=yes
+
+<% $network.each |$key, $value| { -%>
+<%= $key %>=<%= $value %>
+<% } -%>
 
 # for networkd >= 244 KeepConfiguration stops networkd from
 # removing routes on this interface when restarting
