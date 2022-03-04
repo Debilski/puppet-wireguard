@@ -89,6 +89,7 @@ define wireguard::interface (
   Optional[Integer[1280, 9000]] $mtu = undef,
   Optional[String[1]] $public_key = undef,
   Array[Hash[String[1], Variant[String[1], Boolean]]] $routes = [],
+  Hash $network = [],
 ) {
   require wireguard
 
@@ -161,6 +162,7 @@ define wireguard::interface (
     'interface' => $interface,
     'addresses' => $addresses,
     'routes'    => $routes,
+    'network'   => $network,
   }
 
   systemd::network { "${interface}.network":
